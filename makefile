@@ -6,7 +6,7 @@
 #    By: ppatil <ppatil@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/05 23:33:26 by ppatil            #+#    #+#              #
-#    Updated: 2016/10/08 11:55:12 by ppatil           ###   ########.fr        #
+#    Updated: 2016/10/10 11:43:43 by ppatil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ C_FILES = gnl_test.c
 LIBFT = libft.a
 # This is required in the assignment if using libft.
 LIBFT_DIR = $(GNL_SOURCE_DIR)/libft
+#MOULITEST_DIR = ./moulitest_files
 
 INCLUDE_DIRS =	. \
 				$(LIBFT_DIR) \
@@ -49,6 +50,7 @@ default :
 	@echo "[ - Edit this makefile to point GNL_SOURCE_DIR to your  ]"
 	@echo "[   project directory.                                  ]"
 	@echo "[ USAGE:                                                ]"
+	@echo "[ - make mtest : Runs the get_next_line Moulitest.      ]"
 	@echo "[ - make buff_1 : Runs test with BUFF_SIZE set to 1     ]"
 	@echo "[ - make buff_16 : Runs test with BUFF_SIZE set to 16   ]"
 	@echo "[ - make buff_32 : Runs test with BUFF_SIZE set to 32   ]"
@@ -64,6 +66,12 @@ default :
 	@echo "[   assignment specifies it.                            ]"
 	@echo "========================================================="
 	@echo ""
+
+# mtest : moulitest_config
+# 	$(MAKE) -C $(MOULITEST_DIR) gnl
+
+# moulitest_config :
+# 	@echo "GET_NEXT_LINE_PATH = $(GNL_SOURCE_DIR)" > $(MOULITEST_DIR)/config.ini
 
 buff_1 :
 	$(MAKE) $(NAME) TEST_BUFF_SIZE=1
@@ -121,9 +129,11 @@ $(SRC_CPY) : $(GNL_SOURCE_DIR)/get_next_line.c
 
 clean :
 	rm -f $(NAME)
+	rm -f *.bkp
+	rm -f $(HEADER_CPY) $(SRC_CPY)
 
 re : clean $(NAME)
 
 .PHONY :	clean re buff_1 buff_16 buff_32 buff_42 buff_64 \
 			buff_128 buff_2048 buff_4096 buff_EXTREME \
-			$(NAME) $(SRC_CPY) $(HEADER_CPY)
+			$(NAME) $(SRC_CPY) $(HEADER_CPY) #moulitest_config
