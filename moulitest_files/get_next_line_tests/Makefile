@@ -99,6 +99,7 @@ clean:
 fclean: clean
 	-make -k -C $(FRAMEWORK_PATH) fclean
 	-rm -f $(NAME)
+
 	# Removed following line because it tries to make the temp directory which has no makefile.
 	#-make -k -C $(RENDU_PATH) fclean
 
