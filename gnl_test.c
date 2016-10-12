@@ -13,6 +13,7 @@
 #include GNL_HEADER_CPY
 #include <fcntl.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "ft_ansi.h"
 
 void	test_basic(void)
@@ -36,6 +37,7 @@ void	test_basic(void)
 	{
 		line_count++;
 		printf(ANSI_F_CYAN "%zu" ANSI_RESET "\t|%s" ANSI_F_CYAN "$\n" ANSI_RESET, line_count, line);
+		free(line);
 	}
 	if (line_count != 12)
 		printf(ANSI_F_RED "ERROR: test_basic(...) failed.\n" ANSI_RESET);
@@ -75,24 +77,29 @@ void	test_poems(void)
 		line_count++;
 		get_next_line(fd_i, &line);
 		printf(ANSI_F_CYAN "%zu" ANSI_RESET "\t|%s" ANSI_F_CYAN "$\n" ANSI_RESET, line_count, line);
+		free(line);
 	}
 	while (get_next_line(fd_a, &line))
 	{
 		line_count++;
 		printf(ANSI_F_CYAN "%zu" ANSI_RESET "\t|%s" ANSI_F_CYAN "$\n" ANSI_RESET, line_count, line);
+		free(line);
 	}
 	line_count++;
 	get_next_line(fd_i, &line);
 	printf(ANSI_F_CYAN "%zu" ANSI_RESET "\t|%s" ANSI_F_CYAN "$\n" ANSI_RESET, line_count, line);
+	free(line);
 	while (get_next_line(fd_b, &line))
 	{
 		line_count++;
 		printf(ANSI_F_CYAN "%zu" ANSI_RESET "\t|%s" ANSI_F_CYAN "$\n" ANSI_RESET, line_count, line);
+		free(line);
 	}
 	while (get_next_line(fd_i, &line))
 	{
 		line_count++;
 		printf(ANSI_F_CYAN "%zu" ANSI_RESET "\t|%s" ANSI_F_CYAN "$\n" ANSI_RESET, line_count, line);
+		free(line);
 	}
 	if (line_count != 45)
 		printf(ANSI_F_RED "\nERROR: Interleaved files test failed! [ test_poems(...); ]\n" ANSI_RESET);
@@ -134,6 +141,7 @@ void	test_null_cases(void)
 	{
 		line_count++;
 		printf(ANSI_F_CYAN "%zu" ANSI_RESET "\t|%s" ANSI_F_CYAN "$\n" ANSI_RESET, line_count, line);
+		free(line);
 	}
 	if (line_count == 16)
 		printf("\nDid you enjoy your prize? Yes? Okay let's move on.\n");
