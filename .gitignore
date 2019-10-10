@@ -1,0 +1,8 @@
+*.o
+mtest_tmp/*
+*.a
+*_cpy*
+get_next_line_tests
+*.dSYM
+sandbox/*
+gnl_tester

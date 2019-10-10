@@ -46,6 +46,7 @@ static void simple_string(t_test *test)
 	dup2(out_fd3, fd3);
 	close(p_fd3[1]);
 
+	/* mt_assert(0); */
 	get_next_line(p_fd0[0], &line_fd0);
 	mt_assert(strcmp(line_fd0, "aaa") == 0);
 

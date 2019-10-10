@@ -3,7 +3,7 @@
 static void simple_string(t_test *test)
 {
     char 	*line = NULL;
-    
+
 	mt_assert(get_next_line(-99, NULL) == -1);
 	mt_assert(get_next_line(-1, NULL) == -1);
 	mt_assert(get_next_line(-10000, NULL) == -1);

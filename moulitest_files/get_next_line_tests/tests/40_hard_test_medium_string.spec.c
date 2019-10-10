@@ -17,7 +17,6 @@ static void test01(t_test *test)
 	out = dup(1);
 	pipe(p);
 	dup2(p[1], 1);
-
 	if (str)
 		write(1, str, strlen(str));
 	close(p[1]);

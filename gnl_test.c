@@ -6,11 +6,12 @@
 /*   By: ppatil <ppatil@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 22:39:37 by ppatil            #+#    #+#             */
-/*   Updated: 2016/10/05 22:39:37 by ppatil           ###   ########.fr       */
+/*   Updated: 2019/10/27 22:39:51 by cacharle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include GNL_HEADER_CPY
+#include <unistd.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -42,7 +43,7 @@ void	test_basic(void)
 	if (line_count != 12)
 		printf(ANSI_F_RED "ERROR: test_basic(...) failed.\n" ANSI_RESET);
 	else
-		printf(ANSI_F_GREEN "Done.\n" ANSI_RESET);	
+		printf(ANSI_F_GREEN "Done.\n" ANSI_RESET);
 	printf(ANSI_F_YELLOW "[ Lines Expected: 12, Lines Read: %zu ]\n" ANSI_RESET, line_count);
 	fd = close(fd);
 	if (fd < 0)
@@ -159,7 +160,7 @@ void	test_null_cases(void)
 int		main(void)
 {
 	printf(ANSI_F_BCYAN "[ Testing get_next_line(...): ]\n");
-	printf("[ Current Buffer Size: %.4d   ]\n\n" ANSI_RESET, BUFF_SIZE);
+	printf("[ Current Buffer Size: %.4d   ]\n\n" ANSI_RESET, BUFFER_SIZE);
 	test_basic();
 	test_poems();
 	test_null_cases();

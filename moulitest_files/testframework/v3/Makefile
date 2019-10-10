@@ -11,7 +11,7 @@ FLAGS = -Wall -Werror -Wextra -ggdb
 # C_DIRS = $(shell find $(C_DIR) -type d -follow -print)
 
 all: clean
-	$(CC) $(FLAGS) $(INCLUDES) -c $(SRCS)
+	$(CC) $(FLAGS) $(INCLUDES) -c $(SRCS) $(HOME)/get_next_line/get_next_line_utils.c
 	ar rc $(NAME) *.o
 
 clean:
