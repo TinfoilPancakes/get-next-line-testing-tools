@@ -18,8 +18,10 @@ static void simple_string(t_test *test)
 	dup2(out, fd);
 	get_next_line(p[0], &line);
 	mt_assert(strcmp(line, "abcdefghijklmnop") == 0);
+	free(line);
 	ret = get_next_line(p[0], &line);
 	mt_assert(ret == 0);
+	free(line);
 }
 
 void	suite_09_test_line_of_16(t_suite *suite)

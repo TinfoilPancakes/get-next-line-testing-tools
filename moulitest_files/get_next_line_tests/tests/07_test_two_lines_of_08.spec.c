@@ -6,7 +6,7 @@ static void simple_string(t_test *test)
 	int		out;
 	int		p[2];
 	int		fd;
-	
+
 	out = dup(1);
 	pipe(p);
 
@@ -18,8 +18,11 @@ static void simple_string(t_test *test)
 	dup2(out, fd);
 	get_next_line(p[0], &line);
 	mt_assert(strcmp(line, "abcdefgh") == 0);
+	free(line);
+
 	get_next_line(p[0], &line);
 	mt_assert(strcmp(line, "ijklmnop") == 0);
+	free(line);
 }
 
 void	suite_07_test_two_lines_of_08(t_suite *suite)

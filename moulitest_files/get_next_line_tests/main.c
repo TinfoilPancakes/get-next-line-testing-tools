@@ -20,5 +20,7 @@ int main()
 	ADD_TESTS
 
 	mt_exec(mt);
+
+	free(mt);
 	return(0);
 }

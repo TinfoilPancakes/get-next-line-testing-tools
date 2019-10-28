@@ -17,12 +17,19 @@ static void simple_string(t_test *test)
 	close(p[1]);
 	get_next_line(p[0], &line);
 	mt_assert(strcmp(line, "aaa") == 0);
+	free(line);
+
 	get_next_line(p[0], &line);
 	mt_assert(strcmp(line, "bbb") == 0);
+	free(line);
+
 	get_next_line(p[0], &line);
 	mt_assert(strcmp(line, "ccc") == 0);
+	free(line);
+
 	get_next_line(p[0], &line);
 	mt_assert(strcmp(line, "ddd") == 0);
+	free(line);
 }
 
 void	suite_01_test_simple(t_suite *suite)

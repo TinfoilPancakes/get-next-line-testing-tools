@@ -9,7 +9,7 @@ static void test01(t_test *test)
 	int fd2;
 	int fd3;
 	int	diff_file_size;
-    
+
     system("mkdir -p sandbox");
 	system("openssl rand -base64 $((30 * 1000 * 3/4)) | tr -d '\n' | tr -d '\r' > sandbox/one_big_fat_line.txt");
 	system("echo '\n' >> sandbox/one_big_fat_line.txt");
@@ -21,9 +21,11 @@ static void test01(t_test *test)
 	{
 	    write(fd2, line, strlen(line));
 	    write(fd2, "\n", 1);
+		free(line);
 	}
 	if (line)
 		write(fd2, line, strlen(line));
+	free(line);
 	close(fd);
 	close(fd2);
 
