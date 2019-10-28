@@ -17,13 +17,14 @@ static void test01(t_test *test)
 	out = dup(1);
 	pipe(p);
 	dup2(p[1], 1);
-
 	if (str)
 		write(1, str, strlen(str));
 	close(p[1]);
 	dup2(out, 1);
 	get_next_line(p[0], &line);
 	mt_assert(strcmp(line, str) == 0);
+	free(line);
+	free(str);
 }
 
 void	suite_40_hard_test_medium_string(t_suite *suite)

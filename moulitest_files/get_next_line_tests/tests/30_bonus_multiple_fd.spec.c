@@ -46,29 +46,38 @@ static void simple_string(t_test *test)
 	dup2(out_fd3, fd3);
 	close(p_fd3[1]);
 
+	/* mt_assert(0); */
 	get_next_line(p_fd0[0], &line_fd0);
 	mt_assert(strcmp(line_fd0, "aaa") == 0);
+	free(line_fd0);
 
 	get_next_line(p_fd1[0], &line_fd1);
 	mt_assert(strcmp(line_fd1, "111") == 0);
+	free(line_fd1);
 
 	get_next_line(p_fd2[0], &line_fd2);
 	mt_assert(strcmp(line_fd2, "www") == 0);
+	free(line_fd2);
 
 	get_next_line(p_fd3[0], &line_fd3);
 	mt_assert(strcmp(line_fd3, "888") == 0);
+	free(line_fd3);
 
 	get_next_line(p_fd0[0], &line_fd0);
 	mt_assert(strcmp(line_fd0, "bbb") == 0);
+	free(line_fd0);
 
 	get_next_line(p_fd1[0], &line_fd1);
 	mt_assert(strcmp(line_fd1, "222") == 0);
+	free(line_fd1);
 
 	get_next_line(p_fd2[0], &line_fd2);
 	mt_assert(strcmp(line_fd2, "zzz") == 0);
+	free(line_fd2);
 
 	get_next_line(p_fd3[0], &line_fd3);
 	mt_assert(strcmp(line_fd3, "999") == 0);
+	free(line_fd3);
 }
 
 void	suite_30_bonus_multiple_fd(t_suite *suite)

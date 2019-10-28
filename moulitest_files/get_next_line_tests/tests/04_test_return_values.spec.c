@@ -21,21 +21,25 @@ static void simple_string(t_test *test)
 	gnl_ret = get_next_line(p[0], &line);
 	mt_assert(gnl_ret == 1);
 	mt_assert(strcmp(line, "abc") == 0);
+	free(line);
 
 	/* Read new line */
 	gnl_ret = get_next_line(p[0], &line);
 	mt_assert(gnl_ret == 1);
 	mt_assert(line == NULL || *line == '\0');
+	free(line);
 
 	/* Read again, but meet EOF */
 	gnl_ret = get_next_line(p[0], &line);
 	mt_assert(gnl_ret == 0);
 	mt_assert(line == NULL || *line == '\0');
+	free(line);
 
 	/* Let's do it once again */
 	gnl_ret = get_next_line(p[0], &line);
 	mt_assert(gnl_ret == 0);
 	mt_assert(line == NULL || *line == '\0');
+	free(line);
 }
 
 void	suite_04_test_return_values(t_suite *suite)

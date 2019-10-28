@@ -24,20 +24,35 @@ static void simple_string(t_test *test)
 	dup2(out, fd);
 	get_next_line(p[0], &line);
 	mt_assert(strcmp(line, "abcd") == 0);
+	free(line);
+
 	get_next_line(p[0], &line);
 	mt_assert(strcmp(line, "efgh") == 0);
+	free(line);
+
 	get_next_line(p[0], &line);
 	mt_assert(strcmp(line, "ijkl") == 0);
+	free(line);
+
 	get_next_line(p[0], &line);
 	mt_assert(strcmp(line, "mnop") == 0);
+	free(line);
+
 	get_next_line(p[0], &line);
 	mt_assert(strcmp(line, "qrst") == 0);
+	free(line);
+
 	get_next_line(p[0], &line);
 	mt_assert(strcmp(line, "uvwx") == 0);
+	free(line);
+
 	get_next_line(p[0], &line);
 	mt_assert(strcmp(line, "yzab") == 0);
+	free(line);
+
 	ret = get_next_line(p[0], &line);
 	mt_assert(ret == 0);
+	free(line);
 }
 
 void	suite_14_test_few_lines_of_4(t_suite *suite)
