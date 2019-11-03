@@ -38,7 +38,7 @@ RENDU_PATH ?= $(shell grep $(RENDU_PATH_KEY) $(CONFIG_INI_PATH) | cut -d '=' -f 
 endif
 
 all:
-	$(FIRST_RULE)
+	@$(FIRST_RULE)
 
 #===============================================================================
 # INCLUDES
@@ -81,24 +81,24 @@ $(O_DIR)%.o: $(C_DIR)%.c $(H_FILES)
 		&& printf "."
 
 exec_tests: $(O_FILES)
-	echo "$(TEST_FILES)"
+	@echo "$(TEST_FILES)"
 ifneq ("$(wildcard $(RENDU_PATH)/libft/Makefile)","")
-	make $(RENDU_MAKE_ARG) -k -C $(LIBFT_PATH)
-	$(eval CC_LIBFT_LIB = $(CC_LIBFT_LIB_DEFAULT))
+	@make $(RENDU_MAKE_ARG) -k -C $(LIBFT_PATH)
+	@$(eval CC_LIBFT_LIB = $(CC_LIBFT_LIB_DEFAULT))
 endif
 ifneq ("$(wildcard $(RENDU_PATH)/Makefile)","")
-	make $(RENDU_MAKE_ARG) -k -C $(RENDU_PATH) $(CC_LIBFT_LIB)
+	@make $(RENDU_MAKE_ARG) -k -C $(RENDU_PATH) $(CC_LIBFT_LIB)
 endif
-	make -k -C $(FRAMEWORK_PATH)
-	$(CC) $(CC_FLAGS) $(CC_INCLUDES) $(CC_DEFINES) $(CC_SOURCE) $^ -o $(NAME) $(CC_FRAMEWORK_LIB) $(CC_LIBS)
-	$(shell pwd)/$(NAME)
+	@make -k -C $(FRAMEWORK_PATH)
+	@$(CC) $(CC_FLAGS) $(CC_INCLUDES) $(CC_DEFINES) $(CC_SOURCE) $^ -o $(NAME) $(CC_FRAMEWORK_LIB) $(CC_LIBS)
+	@$(shell pwd)/$(NAME)
 
 clean:
-	-rm -f $(OBJECTS)
+	@-rm -f $(OBJECTS)
 
 fclean: clean
-	-make -k -C $(FRAMEWORK_PATH) fclean
-	-rm -f $(NAME)
+	@-make -k -C $(FRAMEWORK_PATH) fclean
+	@-rm -f $(NAME)
 
 	# Removed following line because it tries to make the temp directory which has no makefile.
 	#-make -k -C $(RENDU_PATH) fclean

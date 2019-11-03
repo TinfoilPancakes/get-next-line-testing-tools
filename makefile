@@ -6,7 +6,7 @@
 #    By: ppatil <ppatil@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/05 23:33:26 by ppatil            #+#    #+#              #
-#    Updated: 2019/10/27 23:26:25 by cacharle         ###   ########.fr        #
+#    Updated: 2019/11/03 21:36:27 by cacharle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,9 @@ default :
 	@echo "========================================================="
 	@echo ""
 
+mtest_all:
+	@for i in 1 16 32 64 128 2048 4096 EXTREME; do make mtest_$$i; done
+	
 mtest_1 :
 	$(MAKE) mtest TEST_BUFFER_SIZE=1
 
@@ -95,13 +98,16 @@ mtest : moulitest_config
 
 moulitest_config : $(GNL_SOURCE_DIR)/get_next_line.c $(GNL_SOURCE_DIR)/get_next_line.h $(GNL_SOURCE_DIR)/get_next_line_utils.c
 	-mkdir mtest_tmp
-	cp $(GNL_SOURCE_DIR)/get_next_line.h ./mtest_tmp/
-	sed -i.bkp -e 's/.*define BUFFER_SIZE.*//g' ./mtest_tmp/get_next_line.h
-	cp $(GNL_SOURCE_DIR)/get_next_line.c ./mtest_tmp/
-	sed -i.bkp -e 's/.*define BUFFER_SIZE.*//g' ./mtest_tmp/get_next_line.c
-	cp $(GNL_SOURCE_DIR)/get_next_line_utils.c ./mtest_tmp/
-	sed -i.bkp -e 's/.*define BUFFER_SIZE.*//g' ./mtest_tmp/get_next_line_utils.c
-	echo "GET_NEXT_LINE_PATH = $(shell pwd)/mtest_tmp" > $(MOULITEST_DIR)/config.ini
+	@cp $(GNL_SOURCE_DIR)/get_next_line.h ./mtest_tmp/
+	@sed -i.bkp -e 's/.*define BUFFER_SIZE.*//g' ./mtest_tmp/get_next_line.h
+	@cp $(GNL_SOURCE_DIR)/get_next_line.c ./mtest_tmp/
+	@sed -i.bkp -e 's/.*define BUFFER_SIZE.*//g' ./mtest_tmp/get_next_line.c
+	@cp $(GNL_SOURCE_DIR)/get_next_line_utils.c ./mtest_tmp/
+	@sed -i.bkp -e 's/.*define BUFFER_SIZE.*//g' ./mtest_tmp/get_next_line_utils.c
+	@echo "GET_NEXT_LINE_PATH = $(shell pwd)/mtest_tmp" > $(MOULITEST_DIR)/config.ini
+
+buff_all:
+	@for i in 1 16 32 64 128 2048 4096 EXTREME; do make buff_$$i; done
 
 buff_1 :
 	$(MAKE) $(NAME) TEST_BUFFER_SIZE=1
@@ -140,26 +146,26 @@ buff_EXTREME :
 	./$(NAME)
 
 $(NAME) : $(C_FILES) $(HEADER_CPY) $(SRC_CPY)
-	$(CC) $(C_FILES) $(GNL_SOURCE_DIR)/get_next_line_utils.c $(SRC_CPY) $(C_FLAGS) \
+	@$(CC) $(C_FILES) $(GNL_SOURCE_DIR)/get_next_line_utils.c $(SRC_CPY) $(C_FLAGS) \
 	-DBUFFER_SIZE=$(TEST_BUFFER_SIZE) \
 	-DGNL_HEADER_CPY=\"$(HEADER_CPY)\" \
 	-DGNL_SRC_CPY=\"$(SRC_CPY)\" \
 	$(I_ARGS) -o $(NAME)
 
 $(HEADER_CPY) : $(GNL_SOURCE_DIR)/get_next_line.h
-	$(shell cp $(GNL_SOURCE_DIR)/get_next_line.h ./$(HEADER_CPY))
-	$(shell sed -i.bkp -e 's/.*define BUFFER_SIZE.*//g' ./$(HEADER_CPY))
+	@$(shell cp $(GNL_SOURCE_DIR)/get_next_line.h ./$(HEADER_CPY))
+	@$(shell sed -i.bkp -e 's/.*define BUFFER_SIZE.*//g' ./$(HEADER_CPY))
 
 $(SRC_CPY) : $(GNL_SOURCE_DIR)/get_next_line.c
-	$(shell cp $(GNL_SOURCE_DIR)/get_next_line.c ./$(SRC_CPY))
-	$(shell sed -i.bkp -e 's/.*include \"get_next_line.h\".*/#include GNL_HEADER_CPY/g' ./$(SRC_CPY))
+	@$(shell cp $(GNL_SOURCE_DIR)/get_next_line.c ./$(SRC_CPY))
+	@$(shell sed -i.bkp -e 's/.*include \"get_next_line.h\".*/#include GNL_HEADER_CPY/g' ./$(SRC_CPY))
 
 clean :
-	rm -f $(NAME)
-	rm -f *.bkp
-	rm -f $(HEADER_CPY) $(SRC_CPY)
+	@rm -f $(NAME)
+	@rm -f *.bkp
+	@rm -f $(HEADER_CPY) $(SRC_CPY)
 	-$(MAKE) -C $(MOULITEST_DIR)/get_next_line_tests fclean
-	rm -rf mtest_tmp
+	@rm -rf mtest_tmp
 
 .PHONY :	clean re buff_1 buff_16 buff_32 buff_42 buff_64 \
 			buff_128 buff_2048 buff_4096 buff_EXTREME \
