@@ -30,6 +30,7 @@ static void test01(t_test *test)
 	close(fd3);
 
 	mt_assert(diff_file_size == 0);
+	free(line);
 }
 
 void	suite_41_hard_test_large_file(t_suite *suite)
